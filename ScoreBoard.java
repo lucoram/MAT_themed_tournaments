@@ -1,5 +1,3 @@
-package AI_ML_dev_contest;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
