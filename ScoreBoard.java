@@ -44,12 +44,23 @@ public class ScoreBoard {
 
     private static void printScoreBoard(List<Contestant> allContestants) {
 
+        System.out.println("----------------------------------------------");
+        System.out.format("| %4s | %-16s | %5s | %-8s |\n", "RANK", "USERNAME", "SCORE", "TIME");
+        System.out.println("----------------------------------------------");
+
         int rank = 1;
 
         for (Contestant contestant : allContestants) {
-            System.out.println(rank + " : " + contestant.toString());
+            formatOutput(rank, contestant);
             rank++;
         }
+
+        System.out.println("----------------------------------------------");
+    }
+
+    private static void formatOutput(int rank, Contestant contestant) {
+        System.out.format("| %4d | %-16s | %5d | %-8s |\n", rank, contestant.getUsername(), contestant.getTotalScore(),
+                formatSecsToTime(contestant.getTotalTimeTaken()));
     }
 
     private static String zeroPad(int value) {
@@ -103,10 +114,16 @@ class Contestant implements Comparable<Contestant> {
         return other.totalScore - totalScore;
     }
 
-    @Override
-    public String toString() {
-        return username.concat(" | ").concat(String.valueOf(totalScore)).concat(" | ")
-                .concat(ScoreBoard.formatSecsToTime(totalTimeTaken));
+    public String getUsername() {
+        return username;
+    }
+
+    public int getTotalScore() {
+        return totalScore;
+    }
+
+    public int getTotalTimeTaken() {
+        return totalTimeTaken;
     }
 }
 
