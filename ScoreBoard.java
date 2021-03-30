@@ -13,7 +13,7 @@ public class ScoreBoard {
         allContestants.add(buildContestant("nyainarazafindr1", "1307-2:56:44", "655-2:42:58", "694-2:44:37"));
         allContestants.add(buildContestant("andryhenintsoa", "1200-2:24:32", "600-0:55:34", "457-3:13:40"));
         allContestants.add(buildContestant("Antenaina", "600-1:47:22", "840-4:21:18", "547-3:41:55"));
-        allContestants.add(buildContestant("afmika", "600-2:59:08", "337-2:27:32", "883-5:08:08"));
+        allContestants.add(buildContestant("afmika", "600-2:59:08", "337-2:27:32", "900-5:08:08"));
         allContestants.add(buildContestant("ratife", "483-2:58:16"));
         allContestants.add(buildContestant("teboka_roa", "300-1:03:55"));
         allContestants.add(buildContestant("fanantenan_1", "250-0:39:46"));
