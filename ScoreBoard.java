@@ -1,31 +1,32 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
+import java.io.File;
 
 public class ScoreBoard {
 
     public static void main(String[] args) {
         List<Contestant> allContestants = new ArrayList<>();
 
-        allContestants.add(buildContestant("r_radoniaina11", "463-2:48:59", "600-2:47:50", "570-2:55:47"));
-        allContestants.add(buildContestant("valdotsiarohasi1", "325-2:09:51", "33-1:39:11", "270-1:03:22"));
-        allContestants.add(buildContestant("ramamj", "300-0:57:22", "871-4:00:21"));
-        allContestants.add(buildContestant("nyainarazafindr1", "1307-2:56:44", "655-2:42:58", "694-2:44:37"));
-        allContestants.add(buildContestant("andryhenintsoa", "1200-2:24:32", "600-0:55:34", "523-3:13:40"));
-        allContestants.add(buildContestant("Antenaina", "600-1:47:22", "840-4:21:18", "571-3:41:55"));
-        allContestants.add(buildContestant("afmika", "600-2:59:08", "337-2:27:32", "900-5:08:08"));
-        allContestants.add(buildContestant("ratife", "483-2:58:16"));
-        allContestants.add(buildContestant("teboka_roa", "300-1:03:55"));
-        allContestants.add(buildContestant("fanantenan_1", "250-0:39:46"));
-        allContestants.add(buildContestant("aryna369", "200-0:10:31"));
-        allContestants.add(buildContestant("kimi_no_a", "130-0:52:13"));
-        allContestants.add(buildContestant("tiantsoa_r1", "110-0:43:02"));
-        allContestants.add(buildContestant("sedera-tax", "25-0:18:21"));
-        allContestants.add(buildContestant("diamondraras", "600-1:56:30"));
-        allContestants.add(buildContestant("puchka", "600-2:19:30", "571-2:26:07"));
-        allContestants.add(buildContestant("fitiavana_raman1", "300-0:44:38"));
-        allContestants.add(buildContestant("dinasoarakoto13", "271-2:06:10"));
-
+        try
+        {
+	        File file=new File("./scoreboard.csv");
+	        Scanner sc = new Scanner(file);
+	        while (sc.hasNextLine()) {
+		        String scoreLine = sc.nextLine();
+		        String[] parts = scoreLine.split(", ");
+		        String name = parts[0];
+		        String[] score = Arrays.copyOfRange(parts, 1, parts.length);
+		        allContestants.add(buildContestant(name, score));
+	        }
+        }
+        catch(Exception e)
+        {
+        	e.printStackTrace();
+        }
+        
         Collections.sort(allContestants);
 
         printScoreBoard(allContestants);
