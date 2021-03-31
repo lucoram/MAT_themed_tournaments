@@ -1,41 +1,46 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 public class ScoreBoard {
 
-    public static void main(String[] args) {
-        List<Contestant> allContestants = new ArrayList<>();
+    private final static String FILE_NAME = "score_board.csv";
+    private final static String COL_SEPARATOR = ",";
+    private final static String EMPTY_CELL = "-";
+    private final static String SCORE_TIME_SEP = "/";
 
-        allContestants.add(buildContestant("r_radoniaina11", "463-2:48:59", "600-2:47:50", "570-2:55:47"));
-        allContestants.add(buildContestant("valdotsiarohasi1", "325-2:09:51", "33-1:39:11", "270-1:03:22"));
-        allContestants.add(buildContestant("ramamj", "300-0:57:22", "871-4:00:21"));
-        allContestants.add(buildContestant("nyainarazafindr1", "1307-2:56:44", "655-2:42:58", "694-2:44:37"));
-        allContestants.add(buildContestant("andryhenintsoa", "1200-2:24:32", "600-0:55:34", "523-3:13:40"));
-        allContestants.add(buildContestant("Antenaina", "600-1:47:22", "840-4:21:18", "571-3:41:55"));
-        allContestants.add(buildContestant("afmika", "600-2:59:08", "337-2:27:32", "900-5:08:08"));
-        allContestants.add(buildContestant("ratife", "483-2:58:16"));
-        allContestants.add(buildContestant("teboka_roa", "300-1:03:55"));
-        allContestants.add(buildContestant("fanantenan_1", "250-0:39:46"));
-        allContestants.add(buildContestant("aryna369", "200-0:10:31"));
-        allContestants.add(buildContestant("kimi_no_a", "130-0:52:13"));
-        allContestants.add(buildContestant("tiantsoa_r1", "110-0:43:02"));
-        allContestants.add(buildContestant("sedera-tax", "25-0:18:21"));
-        allContestants.add(buildContestant("diamondraras", "600-1:56:30"));
-        allContestants.add(buildContestant("puchka", "600-2:19:30", "571-2:26:07"));
-        allContestants.add(buildContestant("fitiavana_raman1", "300-0:44:38"));
-        allContestants.add(buildContestant("dinasoarakoto13", "271-2:06:10"));
-
+    public static void main(String[] args) throws FileNotFoundException {
+        List<Contestant> allContestants = buildAllContestants();
         Collections.sort(allContestants);
-
         printScoreBoard(allContestants);
     }
 
-    private static Contestant buildContestant(String username, String... contestResults) {
-        Contestant newContestant = new Contestant(username);
+    private static List<Contestant> buildAllContestants() throws FileNotFoundException {
+        List<Contestant> allContestants = new ArrayList<>();
+        Scanner scanner = new Scanner(new File(FILE_NAME));
 
-        for (String result : contestResults) {
-            String[] parts = result.split("-");
+        while (scanner.hasNextLine()) {
+            String[] lineDetails = scanner.nextLine().split(COL_SEPARATOR);
+            allContestants.add(buildContestant(lineDetails));
+        }
+
+        return allContestants;
+    }
+
+    private static Contestant buildContestant(String[] contestResults) {
+        Contestant newContestant = new Contestant(contestResults[0]);
+
+        for (int i = 1; i < contestResults.length; i++) {
+            String result = contestResults[i];
+
+            if (result.equals(EMPTY_CELL)) {
+                continue;
+            }
+
+            String[] parts = result.split(SCORE_TIME_SEP);
             newContestant.addContestResult(new ContestResult(Integer.parseInt(parts[0]), convertTimeToSecs(parts[1])));
         }
 
