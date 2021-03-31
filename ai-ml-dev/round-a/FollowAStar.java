@@ -42,6 +42,8 @@ public class FollowAStar {
 
         System.out.println((end - start) + " ms");
         System.out.println("iterations : " + iterCount);
+
+        scan.close();
     }
 
     static int[][] diffs = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
