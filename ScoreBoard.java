@@ -22,6 +22,9 @@ public class ScoreBoard {
         List<Contestant> allContestants = new ArrayList<>();
         Scanner scanner = new Scanner(new File(FILE_NAME));
 
+        // skip header
+        scanner.nextLine();
+
         while (scanner.hasNextLine()) {
             String[] lineDetails = scanner.nextLine().split(COL_SEPARATOR);
             allContestants.add(buildContestant(lineDetails));
