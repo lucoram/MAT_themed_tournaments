@@ -1,0 +1,10 @@
+Thrillers
+Action
+Historical
+Musicals
+Fantasy
+Romance
+Science-Fiction
+Western
+Comedy
+Drama

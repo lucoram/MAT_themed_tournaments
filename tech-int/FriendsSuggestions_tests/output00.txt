@@ -1,0 +1,6 @@
+faniry [kanto, narindra, sariaka]
+felana [nanja, narindra, sariaka]
+kanto [faniry, nanja]
+nanja [felana, kanto]
+narindra [faniry, felana, sariaka]
+sariaka [faniry, felana, narindra]
